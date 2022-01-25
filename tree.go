@@ -37,13 +37,17 @@ func (r *ExpressionTree) Add(name string, lineNum int) {
 	// browser.
 	// The formula below implements this algorithm, with lower numbers
 	// being better.
-	if lineNum>>20 > 0 {
-		panic("Need more bits for lineNum!")
+	if lineNum >> 20 > 0 {
+	    // Need more bits for lineNum
+		return
 	}
-	if len(nameBytes)>>10 > 0 {
-		panic("Need more bits for the UA regexp length!")
+
+	if len(nameBytes) >> 10 > 0 {
+	    // Need more bits for the UA regexp length
+		return
 	}
-	score := int32(((1<<10)-len(nameBytes))<<20 + lineNum)
+
+	score := int32(((1 << 10) - len(nameBytes)) << 20 + lineNum)
 
 	last := r.root
 	for _, e := range exp {
